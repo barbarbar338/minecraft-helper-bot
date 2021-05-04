@@ -7,7 +7,9 @@ const ComeCommand: Bot.Command = {
 	args_definitions: [],
 	master_only: true,
 	execute: ({ manager, username }) => {
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
+			if (manager.getFollowing())
+				return manager.bot.chat("I'm already following you.");
 			const default_move = new Movements(
 				manager.bot,
 				manager.minecraft_data!,
