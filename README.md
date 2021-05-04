@@ -1,0 +1,3 @@
+# ✨ Minecraft Bot
+
+(WIP)
