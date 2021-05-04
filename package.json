@@ -5,7 +5,7 @@
 	"private": true,
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/barbarbar338/minecraft-bot"
+		"url": "https://github.com/barbarbar338/minecraft-helper-bot"
 	},
 	"author": {
 		"email": "demirci.baris38@gmail.com",
@@ -13,7 +13,7 @@
 		"url": "https://bariscodes.me/"
 	},
 	"license": "GPL-3.0",
-	"description": "✨ Minecraft bot",
+	"description": "🤖 A Minecraft bot that helps you about everything",
 	"scripts": {
 		"dev": "ts-node src",
 		"dev:watch": "nodemon",
