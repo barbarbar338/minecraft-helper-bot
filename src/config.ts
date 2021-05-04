@@ -8,7 +8,7 @@ config();
 const BOT_OPTIONS: ClientOptions = {
 	host: "localhost",
 	username: "MinecraftBot",
-	port: 52650,
+	port: 58067,
 };
 
 const VIEWER_OPTIONS: ViewerOptions = {

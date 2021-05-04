@@ -21,7 +21,8 @@ export function create_root_state(manager: Core) {
 		new StateTransition({
 			parent: followMasterState,
 			child: idleState,
-			shouldTransition: () => followMasterState.isFinished(),
+			shouldTransition: () =>
+				!manager.getFollowing() || followMasterState.isFinished(),
 		}),
 	];
 	const root_state = new NestedStateMachine(transitions, idleState);

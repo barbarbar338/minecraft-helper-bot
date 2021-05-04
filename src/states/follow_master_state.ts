@@ -35,7 +35,7 @@ export default function follow_master_state(manager: Core) {
 		}),
 		new StateTransition({
 			parent: getClosestPlayer,
-			child: exit,
+			child: lookAtPlayer,
 			shouldTransition: () => followPlayer.distanceToTarget() < 3,
 		}),
 		new StateTransition({

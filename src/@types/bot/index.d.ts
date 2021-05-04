@@ -2,6 +2,7 @@ import { BotEvents } from "mineflayer";
 import { Core } from "../../struct/Core";
 import { Result, OptionDefinitions } from "bargs";
 import { Vec3 } from "vec3";
+import { goals, Movements } from "mineflayer-pathfinder";
 export {};
 
 declare module "mineflayer" {
@@ -17,6 +18,10 @@ declare module "mineflayer" {
 				priotpriority?: "saturation" | "foodPoints";
 				startAt?: number;
 			};
+		};
+		public pathfinder: {
+			setMovements: (movements: Movements) => void;
+			setGoal: (goal: goals.GoalNear) => void; // hardcoded for now
 		};
 	}
 }
