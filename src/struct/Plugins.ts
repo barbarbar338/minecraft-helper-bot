@@ -4,6 +4,7 @@ import { plugin as collector } from "mineflayer-collectblock";
 import autoeat from "mineflayer-auto-eat";
 
 export const plugins = [
+	// Plugin "mineflayer-collectblock" is currently broken. See "https://github.com/PrismarineJS/mineflayer-collectblock/issues/65" for a workaround and the cause of the error.
 	(collector as unknown) as typeof pathfinder, // some type hacks
 	pathfinder,
 	armorManager,
