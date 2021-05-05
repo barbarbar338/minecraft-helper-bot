@@ -1,0 +1,2 @@
+master_only: This command is master only. Run "%{prefix}obey" command first.
+execution_error: An error occurred while running the command and the developers were notified. Please try again later.

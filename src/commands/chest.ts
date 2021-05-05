@@ -6,7 +6,7 @@ const ChestCommand: Bot.Command = {
 	args_definitions: [],
 	master_only: true,
 	execute: ({ manager }) => {
-		manager.fetchChests(manager.bot, manager.minecraft_data as IndexedData);
+		manager.fetchChests(manager, manager.minecraft_data as IndexedData);
 	},
 };
 

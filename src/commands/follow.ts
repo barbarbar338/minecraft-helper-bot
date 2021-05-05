@@ -5,14 +5,29 @@ const FollowCommad: Bot.Command = {
 	master_only: true,
 	execute: ({ manager }) => {
 		const followedAt = manager.getFollowing();
+
 		manager.setFollowing(!followedAt);
+
 		if (!!followedAt) {
 			const now = Date.now();
 			const parsed = manager.parseMS(now - followedAt);
+
 			manager.bot.chat(
-				`I won't follow you. (${parsed.days}d ${parsed.hours}h ${parsed.minutes}m ${parsed.seconds}s)`,
+				manager.i18n.get(
+					manager.language,
+					"commands",
+					"wont_follow",
+					parsed,
+				) as string,
 			);
-		} else manager.bot.chat("I will follow you.");
+		} else
+			manager.bot.chat(
+				manager.i18n.get(
+					manager.language,
+					"commands",
+					"will_follow",
+				) as string,
+			);
 	},
 };
 

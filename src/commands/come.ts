@@ -9,39 +9,65 @@ const ComeCommand: Bot.Command = {
 	execute: ({ manager, username }) => {
 		return new Promise((resolve) => {
 			if (manager.getFollowing())
-				return manager.bot.chat("I'm already following you.");
-			const default_move = new Movements(
-				manager.bot,
-				manager.minecraft_data!,
-			);
+				return manager.bot.chat(
+					manager.i18n.get(
+						manager.language,
+						"commands",
+						"already_following",
+					) as string,
+				);
+
 			const target = manager.bot.players[username]
 				? manager.bot.players[username].entity
 				: undefined;
 			if (!target) {
-				manager.bot.chat("I don't see you.");
+				manager.bot.chat(
+					manager.i18n.get(
+						manager.language,
+						"commands",
+						"dont_see",
+					) as string,
+				);
 				return resolve(false);
 			}
+
 			const goal = new goals.GoalNear(
 				target.position.x,
 				target.position.y,
 				target.position.z,
 				1,
 			);
+			const default_move = new Movements(
+				manager.bot,
+				manager.minecraft_data!,
+			);
+
 			manager.bot.pathfinder.setMovements(default_move);
 			manager.bot.pathfinder.setGoal(goal);
-			manager.bot.chat("I am coming to you.");
+
+			manager.bot.chat(
+				manager.i18n.get(
+					manager.language,
+					"commands",
+					"coming",
+				) as string,
+			);
+
+			// a little type hack (mineflayer-pathfinder plugin adds this event but doesn't have type definitions)
+			const event_name = ("goal_reached" as unknown) as keyof BotEvents;
+
 			const listener = () => {
-				manager.bot.chat("Here I am.");
-				manager.bot.removeListener(
-					("goal_reached" as unknown) as keyof BotEvents,
-					listener,
+				manager.bot.chat(
+					manager.i18n.get(
+						manager.language,
+						"commands",
+						"here_it_is",
+					) as string,
 				);
+				manager.bot.removeListener(event_name, listener);
 				resolve(true);
 			};
-			manager.bot.addListener(
-				("goal_reached" as unknown) as keyof BotEvents,
-				listener,
-			);
+			manager.bot.addListener(event_name, listener);
 		});
 	},
 };

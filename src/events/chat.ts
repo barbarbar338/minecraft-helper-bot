@@ -6,6 +6,7 @@ const ChatEvent: Bot.Event = {
 	once: false,
 	execute: async (manager, username: string, message: string) => {
 		if (!message.startsWith(CONFIG.PREFIX)) return;
+
 		const [command, ...args] = message
 			.slice(CONFIG.PREFIX.length)
 			.trim()
@@ -16,7 +17,9 @@ const ChatEvent: Bot.Event = {
 
 		if (cmd.master_only && manager.getMaster().master != username)
 			return manager.bot.chat(
-				`This command is master only. Run "${CONFIG.PREFIX}obey" command first.`,
+				manager.i18n.get(manager.language, "events", "master_only", {
+					prefix: CONFIG.PREFIX,
+				}) as string,
 			);
 
 		try {
@@ -31,8 +34,13 @@ const ChatEvent: Bot.Event = {
 				`An error occured while executing "${cmd.name}" command with "${args}" args`,
 				err,
 			);
+
 			manager.bot.chat(
-				"An error occurred while running the command and the developers were notified. Please try again later.",
+				manager.i18n.get(
+					manager.language,
+					"events",
+					"execution_error",
+				) as string,
 			);
 		}
 	},

@@ -1,0 +1,14 @@
+pong: Pong!
+slave_of: I'm currently slave of %{master}. (%{days}d %{hours}h %{minutes}m %{seconds}s)
+obey_success: From now, I'll do whatever you say.
+bot_free: I'm currently free.
+become_free: I am free from now. (%{days}d %{hours}h %{minutes}m %{seconds}s)
+will_follow: I will follow you.
+wont_follow: I won't follow you. (%{days}d %{hours}h %{minutes}m %{seconds}s)
+already_following: I'm already following you.
+dont_see: I don't see you.
+coming: I am coming to you.
+here_it_is: Here I am.
+enter_block_name: You must enter the full name of the block you want me to collect.
+invalid_block: I could not find the block you specified. Enter the full Minecraft name of the block.
+blocks_collected: Block(s) has been successfully collected.

@@ -19,6 +19,7 @@
 		"dev:watch": "nodemon",
 		"prebuild": "rimraf dist",
 		"build": "tsc",
+		"postbuild": "copyfiles -u 1 src/**/*.yaml dist/",
 		"start": "node dist",
 		"format": "prettier --write .",
 		"format:watch": "onchange . -- prettier --write {{changed}}",
@@ -29,6 +30,7 @@
 		"@types/node": "^15.0.1",
 		"@typescript-eslint/eslint-plugin": "^4.22.0",
 		"@typescript-eslint/parser": "^4.22.0",
+		"copyfiles": "^2.4.1",
 		"eslint": "^7.25.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-import": "^2.22.1",
@@ -41,6 +43,7 @@
 	"dependencies": {
 		"bargs": "^1.0.2",
 		"dotenv": "^8.2.0",
+		"locale-parser": "^1.1.2",
 		"minecraft-data": "^2.84.0",
 		"minecraft-protocol": "^1.25.0",
 		"mineflayer": "^3.6.0",

@@ -4,7 +4,7 @@ import { plugin as collector } from "mineflayer-collectblock";
 import autoeat from "mineflayer-auto-eat";
 
 export const plugins = [
-	(collector as unknown) as typeof pathfinder,
+	(collector as unknown) as typeof pathfinder, // some type hacks
 	pathfinder,
 	armorManager,
 	autoeat,

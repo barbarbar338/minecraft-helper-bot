@@ -1,11 +1,13 @@
 import { IndexedData } from "minecraft-data";
 import { Bot } from "mineflayer";
 import { CONFIG } from "../config";
+import { Core } from "./Core";
 
 export class Utils {
 	private master?: string;
 	private master_since?: number;
 	private followed_at?: number;
+	private collected_at?: number;
 
 	public getMaster() {
 		const { master, master_since } = this;
@@ -16,6 +18,10 @@ export class Utils {
 		return this.followed_at;
 	}
 
+	public getCollecting() {
+		return this.collected_at;
+	}
+
 	public setMaster(master?: string) {
 		this.master = master;
 		this.master_since = master ? Date.now() : undefined;
@@ -23,6 +29,10 @@ export class Utils {
 
 	public setFollowing(is_following: boolean) {
 		this.followed_at = is_following ? Date.now() : undefined;
+	}
+
+	public setCollecting(is_collecting: boolean) {
+		this.collected_at = is_collecting ? Date.now() : undefined;
 	}
 
 	public parseMS(ms: number) {
@@ -37,26 +47,47 @@ export class Utils {
 		};
 	}
 
-	public collectBlock(bot: Bot, blockID: number, count?: number) {
+	public collectBlock(manager: Core, blockID: number, count?: number) {
 		const limit = count || 1;
+
 		return new Promise((resolve, reject) => {
-			const blocks = bot.findBlocks({
+			const blocks = manager.bot.findBlocks({
 				matching: blockID,
 				maxDistance: 64,
 				count: limit,
 			});
+
 			if (blocks.length < 1) {
-				bot.chat("I don't see that block nearby.");
+				manager.bot.chat(
+					manager.i18n.get(
+						manager.language,
+						"utils",
+						"no_blocks_nearby",
+					) as string,
+				);
 				resolve(false);
 			} else {
 				const targets = [];
+
 				for (let i = 0; i < Math.min(blocks.length, limit); i++) {
-					targets.push(bot.blockAt(blocks[i]));
+					targets.push(manager.bot.blockAt(blocks[i]));
 				}
-				bot.chat(
-					`Found ${targets.length} block(s), starting to collect them.`,
+
+				manager.bot.chat(
+					manager.i18n.get(
+						manager.language,
+						"utils",
+						"found_blocks",
+						{
+							count: targets.length,
+						},
+					) as string,
 				);
-				bot.collectBlock.collect(targets, (err) => {
+
+				manager.setCollecting(true);
+
+				manager.bot.collectBlock.collect(targets, (err) => {
+					manager.setCollecting(false);
 					if (err) {
 						console.log(err);
 						reject(err);
@@ -66,19 +97,24 @@ export class Utils {
 		});
 	}
 
-	public fetchChests(bot: Bot, minecraft_data: IndexedData) {
-		bot.collectBlock.chestLocations = bot.findBlocks({
+	public fetchChests(manager: Core, minecraft_data: IndexedData) {
+		manager.bot.collectBlock.chestLocations = manager.bot.findBlocks({
 			matching: minecraft_data.blocksByName.chest.id,
 			maxDistance: 32,
 			count: 999999,
 		});
-		if (bot.collectBlock.chestLocations.length === 0) {
-			bot.chat(
-				`I don't see any chests nearby. You may need to assist me when my inventory is full. (or place some chests and use the "${CONFIG.PREFIX}chest" command.)`,
+
+		if (manager.bot.collectBlock.chestLocations.length === 0)
+			manager.bot.chat(
+				manager.i18n.get(manager.language, "utils", "no_chest_found", {
+					prefix: CONFIG.PREFIX,
+				}) as string,
 			);
-		} else
-			bot.chat(
-				`I see ${bot.collectBlock.chestLocations.length} chest(s) nearby. I'll use them when my inventory is full.`,
+		else
+			manager.bot.chat(
+				manager.i18n.get(manager.language, "utils", "found_chest", {
+					count: manager.bot.collectBlock.chestLocations.length,
+				}) as string,
 			);
 	}
 }

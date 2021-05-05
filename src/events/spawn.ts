@@ -1,8 +1,10 @@
 import { mineflayer as viewer } from "prismarine-viewer";
-//import inventory from "mineflayer-web-inventory";
 import { CONFIG } from "../config";
 import { create_root_state } from "../states/root";
 import minecraftData from "minecraft-data";
+
+// causes error (waiting for plugin update)
+//import inventory from "mineflayer-web-inventory";
 
 const SpawnEvent: Bot.Event = {
 	name: "spawn",
@@ -17,7 +19,8 @@ const SpawnEvent: Bot.Event = {
 
 		create_root_state(manager);
 
-		manager.fetchChests(manager.bot, manager.minecraft_data);
+		manager.fetchChests(manager, manager.minecraft_data);
+
 		manager.logger.success("Bot successfully spawned");
 	},
 };
