@@ -27,6 +27,15 @@ export class Core extends Utils {
 		this.bot.loadPlugins(plugins);
 	}
 
+	public isMoving = () => this.isOnState() || this.isActing();
+
+	public isOnState = () => !!this.getCollecting() || !!this.getFollowing();
+
+	public isActing = () =>
+		this.bot.pathfinder.isBuilding() ||
+		this.bot.pathfinder.isMoving() ||
+		this.bot.pathfinder.isMining();
+
 	private async eventLoader() {
 		this.logger.event("Loading events");
 

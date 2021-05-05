@@ -7,21 +7,28 @@ export {};
 
 declare module "mineflayer" {
 	type errFN = (err: any) => void;
+
 	type collectFN = (block: any, errfn: errFN) => void;
+
 	class Bot {
 		public collectBlock: {
 			collect: collectFN;
 			chestLocations?: Vec3[];
 		};
+
 		public autoEat: {
 			options: {
 				priotpriority?: "saturation" | "foodPoints";
 				startAt?: number;
 			};
 		};
+
 		public pathfinder: {
 			setMovements: (movements: Movements) => void;
 			setGoal: (goal: goals.GoalNear) => void; // hardcoded for now
+			isMoving: () => boolean;
+			isMining: () => boolean;
+			isBuilding: () => boolean;
 		};
 	}
 }

@@ -12,3 +12,4 @@ here_it_is: Here I am.
 enter_block_name: You must enter the full name of the block you want me to collect.
 invalid_block: I could not find the block you specified. Enter the full Minecraft name of the block.
 blocks_collected: Block(s) has been successfully collected.
+is_acting: I am currently doing something. Call me back later.

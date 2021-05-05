@@ -10,6 +10,7 @@ import { Core } from "src/struct/Core";
 
 export default function follow_master_state(manager: Core) {
 	const targets = {};
+
 	const enter = new BehaviorIdle();
 	const exit = new BehaviorIdle();
 	const followPlayer = new BehaviorFollowEntity(manager.bot, targets);
@@ -49,6 +50,7 @@ export default function follow_master_state(manager: Core) {
 			shouldTransition: () => lookAtPlayer.distanceToTarget() >= 3,
 		}),
 	];
+
 	const state = new NestedStateMachine(transitions, enter, exit);
 	state.stateName = "Follow Master";
 	return state;

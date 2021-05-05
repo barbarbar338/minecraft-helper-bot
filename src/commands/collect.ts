@@ -15,6 +15,15 @@ const CollectCommad: Bot.Command = {
 	],
 	master_only: true,
 	execute: async ({ manager, args }) => {
+		if (manager.getCollecting())
+			return manager.bot.chat(
+				manager.i18n.get(
+					manager.language,
+					"commands",
+					"is_acting",
+				) as string,
+			);
+
 		const { block, count } = args;
 
 		if (!block)

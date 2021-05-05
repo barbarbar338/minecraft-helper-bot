@@ -17,6 +17,15 @@ const ComeCommand: Bot.Command = {
 					) as string,
 				);
 
+			if (manager.getCollecting())
+				return manager.bot.chat(
+					manager.i18n.get(
+						manager.language,
+						"commands",
+						"is_acting",
+					) as string,
+				);
+
 			const target = manager.bot.players[username]
 				? manager.bot.players[username].entity
 				: undefined;

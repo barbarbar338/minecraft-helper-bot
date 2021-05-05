@@ -4,7 +4,6 @@ import {
 	BehaviorIdle,
 	BehaviorLookAtEntity,
 	BotStateMachine,
-	EntityFilters,
 	NestedStateMachine,
 	StateMachineWebserver,
 	StateTransition,
@@ -12,13 +11,16 @@ import {
 import { CONFIG } from "../config";
 import { Core } from "../struct/Core";
 import follow_master_state from "./follow_master_state";
+import collect_state from "./collect_state";
 
 export function create_root_state(manager: Core) {
 	const targets = {};
+
 	const idleState = new BehaviorIdle();
 	const lookAtPlayersState = new BehaviorLookAtEntity(manager.bot, targets);
 	const followPlayer = new BehaviorFollowEntity(manager.bot, targets);
 	const followMasterState = follow_master_state(manager);
+	const collectState = collect_state(manager);
 	const getClosestPlayer = new BehaviorGetClosestEntity(
 		manager.bot,
 		targets,
@@ -28,33 +30,41 @@ export function create_root_state(manager: Core) {
 	const transitions = [
 		new StateTransition({
 			parent: idleState,
+			child: collectState,
+			shouldTransition: () => !manager.isActing(),
+		}),
+		new StateTransition({
+			parent: collectState,
 			child: getClosestPlayer,
-			shouldTransition: () => true,
+			shouldTransition: () => collectState.isFinished(),
 		}),
 		new StateTransition({
 			parent: getClosestPlayer,
 			child: lookAtPlayersState,
 			shouldTransition: () =>
-				!!manager.getFollowing() || followPlayer.distanceToTarget() < 5,
+				manager.isMoving() || followPlayer.distanceToTarget() < 5,
 		}),
 		new StateTransition({
 			parent: lookAtPlayersState,
 			child: followMasterState,
 			shouldTransition: () =>
-				!!manager.getFollowing() ||
-				followPlayer.distanceToTarget() >= 5,
+				manager.isMoving() || followPlayer.distanceToTarget() >= 5,
 		}),
 		new StateTransition({
 			parent: followMasterState,
 			child: idleState,
 			shouldTransition: () =>
-				!manager.getFollowing() || followMasterState.isFinished(),
+				!!manager.getCollecting() ||
+				!manager.getFollowing() ||
+				followMasterState.isFinished(),
 		}),
 	];
 
 	const root_state = new NestedStateMachine(transitions, idleState);
 	root_state.stateName = "Waiting";
+
 	manager.statemachine = new BotStateMachine(manager.bot, root_state);
+
 	const webserver = new StateMachineWebserver(
 		manager.bot,
 		manager.statemachine,
