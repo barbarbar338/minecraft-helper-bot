@@ -10,6 +10,12 @@ const SpawnEvent: Bot.Event = {
 	name: "spawn",
 	once: true,
 	execute: async (manager) => {
+		// reset everything on respawn
+		manager.setCollecting(false);
+		manager.setFalling(false);
+		manager.setFollowing(false);
+		manager.setMaster();
+
 		manager.minecraft_data = minecraftData(manager.bot.version);
 
 		viewer(manager.bot, CONFIG.VIEWER_OPTIONS);
