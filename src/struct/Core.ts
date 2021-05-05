@@ -32,6 +32,7 @@ export class Core extends Utils {
 	public isOnState = () => !!this.getCollecting() || !!this.getFollowing();
 
 	public isActing = () =>
+		!!this.getFalling() ||
 		this.bot.pathfinder.isBuilding() ||
 		this.bot.pathfinder.isMoving() ||
 		this.bot.pathfinder.isMining();

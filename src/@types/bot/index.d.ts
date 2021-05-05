@@ -1,8 +1,9 @@
-import { BotEvents } from "mineflayer";
+import { BotEvents, Block } from "mineflayer";
 import { Core } from "../../struct/Core";
 import { Result, OptionDefinitions } from "bargs";
 import { Vec3 } from "vec3";
 import { goals, Movements } from "mineflayer-pathfinder";
+
 export {};
 
 declare module "mineflayer" {
@@ -11,6 +12,8 @@ declare module "mineflayer" {
 	type collectFN = (block: any, errfn: errFN) => void;
 
 	class Bot {
+		public blockAtCursor(maxDistance: number): Block | undefined;
+
 		public collectBlock: {
 			collect: collectFN;
 			chestLocations?: Vec3[];

@@ -9,7 +9,7 @@ config();
 const BOT_OPTIONS: ClientOptions = {
 	host: "localhost",
 	username: "Dummy",
-	port: 50307,
+	port: 57229,
 };
 
 const VIEWER_OPTIONS: ViewerOptions = {

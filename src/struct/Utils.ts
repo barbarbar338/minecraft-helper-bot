@@ -8,6 +8,7 @@ export class Utils {
 	private master_since?: number;
 	private followed_at?: number;
 	private collected_at?: number;
+	private fall_at?: number;
 
 	public getMaster() {
 		const { master, master_since } = this;
@@ -22,6 +23,10 @@ export class Utils {
 		return this.collected_at;
 	}
 
+	public getFalling() {
+		return this.fall_at;
+	}
+
 	public setMaster(master?: string) {
 		this.master = master;
 		this.master_since = master ? Date.now() : undefined;
@@ -33,6 +38,10 @@ export class Utils {
 
 	public setCollecting(is_collecting: boolean) {
 		this.collected_at = is_collecting ? Date.now() : undefined;
+	}
+
+	public setFalling(is_falling: boolean) {
+		this.fall_at = is_falling ? Date.now() : undefined;
 	}
 
 	public parseMS(ms: number) {
@@ -89,7 +98,6 @@ export class Utils {
 				manager.bot.collectBlock.collect(targets, (err) => {
 					manager.setCollecting(false);
 					if (err) {
-						console.log(err);
 						reject(err);
 					} else resolve(true);
 				});
