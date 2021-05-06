@@ -6,8 +6,7 @@ const FreeCommad: Bot.Command = {
 	execute: ({ manager }) => {
 		const { master_since } = manager.getMaster();
 
-		manager.setMaster();
-		manager.setFollowing(false);
+		manager.reset();
 
 		const now = Date.now();
 		const parsed = manager.parseMS(now - (master_since as number));

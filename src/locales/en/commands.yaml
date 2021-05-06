@@ -13,3 +13,10 @@ enter_block_name: You must enter the full name of the block you want me to colle
 invalid_block: I could not find the block you specified. Enter the full Minecraft name of the block.
 blocks_collected: Block(s) has been successfully collected.
 is_acting: I am currently doing something. Call me back later.
+wont_farm: I won't farm anymore. (%{days}d %{hours}h %{minutes}m %{seconds}s)
+will_farm: I will farm %{crop} (%{seed}).
+specify_crop: Specify a crop name.
+specify_valid_crop: I could not find the crop you specified. Enter the full Minecraft name of the crop.
+specify_seed: Specify a seed name.
+specify_valid_seed: I could not find the seed you specified. Enter the full Minecraft name of the seed.
+no_chests_found: I don't see any chests nearby. Place some chests and use "%{prefix}farm" command again.

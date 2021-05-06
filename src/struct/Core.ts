@@ -29,7 +29,10 @@ export class Core extends Utils {
 
 	public isMoving = () => this.isOnState() || this.isActing();
 
-	public isOnState = () => !!this.getCollecting() || !!this.getFollowing();
+	public isOnState = () =>
+		!!this.getFarming().farmed_at ||
+		!!this.getCollecting() ||
+		!!this.getFollowing();
 
 	public isActing = () =>
 		!!this.getFalling() ||

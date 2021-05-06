@@ -5,7 +5,7 @@ import {
 } from "mineflayer-statemachine";
 import { Core } from "src/struct/Core";
 
-export default function collect_state(manager: Core) {
+export default function farm_state(manager: Core) {
 	const enter = new BehaviorIdle();
 	const exit = new BehaviorIdle();
 
@@ -13,11 +13,11 @@ export default function collect_state(manager: Core) {
 		new StateTransition({
 			parent: enter,
 			child: exit,
-			shouldTransition: () => !manager.getCollecting(),
+			shouldTransition: () => !manager.getFarming().farmed_at,
 		}),
 	];
 
 	const state = new NestedStateMachine(transitions, enter, exit);
-	state.stateName = "Collect";
+	state.stateName = "Farm";
 	return state;
 }

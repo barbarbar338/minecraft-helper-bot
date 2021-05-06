@@ -2,3 +2,4 @@ no_blocks_nearby: I don't see that block nearby.
 found_blocks: Found %{count} block(s), starting to collect them.
 no_chest_found: I don't see any chests nearby. You may need to assist me when my inventory is full. (or place some chests and use the "%{prefix}chest" command.)
 found_chest: I see %{count} chest(s) nearby. I'll use them when my inventory is full.
+chest_full: Farming chest is full. Empty it and use "%{prefix}farm" command again.

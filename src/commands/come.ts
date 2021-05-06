@@ -17,7 +17,11 @@ const ComeCommand: Bot.Command = {
 					) as string,
 				);
 
-			if (manager.getCollecting())
+			if (
+				manager.getCollecting() ||
+				manager.getFalling() ||
+				manager.getFarming().farmed_at
+			)
 				return manager.bot.chat(
 					manager.i18n.get(
 						manager.language,

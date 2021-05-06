@@ -15,7 +15,11 @@ const CollectCommad: Bot.Command = {
 	],
 	master_only: true,
 	execute: async ({ manager, args }) => {
-		if (manager.getCollecting())
+		if (
+			manager.getCollecting() ||
+			manager.getFarming().farmed_at ||
+			manager.getFalling()
+		)
 			return manager.bot.chat(
 				manager.i18n.get(
 					manager.language,

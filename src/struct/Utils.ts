@@ -1,5 +1,5 @@
 import { IndexedData } from "minecraft-data";
-import { Bot } from "mineflayer";
+import { Vec3 } from "vec3";
 import { CONFIG } from "../config";
 import { Core } from "./Core";
 
@@ -9,6 +9,23 @@ export class Utils {
 	private followed_at?: number;
 	private collected_at?: number;
 	private fall_at?: number;
+
+	private farming?: string;
+	private seed?: string;
+	private farmed_at?: number;
+	private farming_chest?: Vec3;
+
+	public getFarming() {
+		const { farming, farmed_at, seed, farming_chest } = this;
+		return { farming, farmed_at, seed, farming_chest };
+	}
+
+	public setFarming(farming?: string, seed?: string, farming_chest?: Vec3) {
+		this.farming = farming;
+		this.seed = seed;
+		this.farming_chest = farming_chest;
+		this.farmed_at = farming ? Date.now() : undefined;
+	}
 
 	public getMaster() {
 		const { master, master_since } = this;
@@ -124,5 +141,13 @@ export class Utils {
 					count: manager.bot.collectBlock.chestLocations.length,
 				}) as string,
 			);
+	}
+
+	public reset() {
+		this.setCollecting(false);
+		this.setFalling(false);
+		this.setFollowing(false);
+		this.setMaster();
+		this.setFarming();
 	}
 }

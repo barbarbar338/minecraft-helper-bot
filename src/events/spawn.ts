@@ -2,6 +2,7 @@ import { mineflayer as viewer } from "prismarine-viewer";
 import { CONFIG } from "../config";
 import { create_root_state } from "../states/root";
 import minecraftData from "minecraft-data";
+import { farming } from "../struct/Farming";
 
 // causes error (waiting for plugin update)
 //import inventory from "mineflayer-web-inventory";
@@ -10,11 +11,8 @@ const SpawnEvent: Bot.Event = {
 	name: "spawn",
 	once: true,
 	execute: async (manager) => {
-		// reset everything on respawn
-		manager.setCollecting(false);
-		manager.setFalling(false);
-		manager.setFollowing(false);
-		manager.setMaster();
+		// reset everything on spawn
+		manager.reset();
 
 		manager.minecraft_data = minecraftData(manager.bot.version);
 
@@ -26,6 +24,9 @@ const SpawnEvent: Bot.Event = {
 		create_root_state(manager);
 
 		manager.fetchChests(manager, manager.minecraft_data);
+
+		// physicsTick doesn't works and this one looks kinda messy. Might be changed in the future
+		farming(manager);
 
 		manager.logger.success("Bot successfully spawned");
 	},
