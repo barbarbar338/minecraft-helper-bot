@@ -97,6 +97,9 @@ const FarmCommand: Bot.Command = {
 		} else {
 			manager.setFarming();
 
+			// didn't used pathfinder because bot destroys crops
+			manager.bot.setControlState("forward", false);
+
 			const now = Date.now();
 			const parsed = manager.parseMS(now - farm.farmed_at);
 

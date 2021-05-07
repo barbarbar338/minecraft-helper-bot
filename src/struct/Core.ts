@@ -1,4 +1,4 @@
-import { Bot, createBot } from "mineflayer";
+import { Bot, BotEvents, createBot } from "mineflayer";
 import { readdirSync } from "fs";
 import { resolve } from "path";
 import { CONFIG } from "../config";
@@ -8,6 +8,8 @@ import { Utils } from "./Utils";
 import { plugins } from "./Plugins";
 import { IndexedData } from "minecraft-data";
 import { I18n } from "locale-parser";
+import { Vec3 } from "vec3";
+import { goals, Movements } from "mineflayer-pathfinder";
 
 export class Core extends Utils {
 	public bot: Bot;
@@ -39,6 +41,28 @@ export class Core extends Utils {
 		this.bot.pathfinder.isBuilding() ||
 		this.bot.pathfinder.isMoving() ||
 		this.bot.pathfinder.isMining();
+
+	public async goTo(vec: Vec3): Promise<void> {
+		return new Promise((promise_resolve) => {
+			const goal = new goals.GoalNear(vec.x, vec.y, vec.z, 1);
+			const default_move = new Movements(this.bot, this.minecraft_data!);
+
+			this.bot.pathfinder.setMovements(default_move);
+			this.bot.pathfinder.setGoal(goal);
+
+			// a little type hack (mineflayer-pathfinder plugin adds this event but doesn't have type definitions)
+			const event_name = ("goal_reached" as unknown) as keyof BotEvents;
+
+			const listener = () => {
+				this.bot.removeListener(event_name, listener);
+				this.bot.setMaxListeners(this.bot.getMaxListeners() - 1);
+				promise_resolve();
+			};
+
+			this.bot.setMaxListeners(this.bot.getMaxListeners() + 1);
+			this.bot.addListener(event_name, listener);
+		});
+	}
 
 	private async eventLoader() {
 		this.logger.event("Loading events");

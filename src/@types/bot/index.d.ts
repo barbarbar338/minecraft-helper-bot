@@ -28,7 +28,7 @@ declare module "mineflayer" {
 
 		public pathfinder: {
 			setMovements: (movements: Movements) => void;
-			setGoal: (goal: goals.GoalNear) => void; // hardcoded for now
+			setGoal: (goal: goals.GoalNear | goals.GoalGetToBlock) => void; // hardcoded for now
 			isMoving: () => boolean;
 			isMining: () => boolean;
 			isBuilding: () => boolean;

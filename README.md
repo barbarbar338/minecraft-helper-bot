@@ -19,3 +19,4 @@ Currently WIP
 -   Defending area ❌
 -   PVP ❌
 -   Improve docs ❌
+-   Improve farming (doesn't deposits seeds) ❌
