@@ -16,7 +16,8 @@ const ComeCommand: Bot.Command = {
 		if (
 			manager.getCollecting() ||
 			manager.getFalling() ||
-			manager.getFarming().farmed_at
+			manager.getFarming().farmed_at ||
+			manager.getGuarding()
 		)
 			return manager.bot.chat(
 				manager.i18n.get(

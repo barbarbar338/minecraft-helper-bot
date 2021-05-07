@@ -9,7 +9,7 @@ export class Utils {
 	private followed_at?: number;
 	private collected_at?: number;
 	private fall_at?: number;
-
+	private guard_at?: number;
 	private farming?: string;
 	private seed?: string;
 	private farmed_at?: number;
@@ -36,6 +36,10 @@ export class Utils {
 		return this.followed_at;
 	}
 
+	public getGuarding() {
+		return this.guard_at;
+	}
+
 	public getCollecting() {
 		return this.collected_at;
 	}
@@ -51,6 +55,10 @@ export class Utils {
 
 	public setFollowing(is_following: boolean) {
 		this.followed_at = is_following ? Date.now() : undefined;
+	}
+
+	public setGuarding(is_following: boolean) {
+		this.guard_at = is_following ? Date.now() : undefined;
 	}
 
 	public setCollecting(is_collecting: boolean) {
@@ -147,6 +155,7 @@ export class Utils {
 		this.setCollecting(false);
 		this.setFalling(false);
 		this.setFollowing(false);
+		this.setGuarding(false);
 		this.setMaster();
 		this.setFarming();
 	}

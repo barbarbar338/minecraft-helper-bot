@@ -3,6 +3,7 @@ import { Core } from "../../struct/Core";
 import { Result, OptionDefinitions } from "bargs";
 import { Vec3 } from "vec3";
 import { goals, Movements } from "mineflayer-pathfinder";
+import { Entity } from "prismarine-entity";
 
 export {};
 
@@ -13,6 +14,11 @@ declare module "mineflayer" {
 
 	class Bot {
 		public blockAtCursor(maxDistance: number): Block | undefined;
+
+		public pvp: {
+			target: any;
+			attack: (entity: Entity) => void;
+		};
 
 		public collectBlock: {
 			collect: collectFN;
@@ -28,7 +34,7 @@ declare module "mineflayer" {
 
 		public pathfinder: {
 			setMovements: (movements: Movements) => void;
-			setGoal: (goal: goals.GoalNear | goals.GoalGetToBlock) => void; // hardcoded for now
+			setGoal: (goal: goals.GoalNear) => void; // hardcoded for now
 			isMoving: () => boolean;
 			isMining: () => boolean;
 			isBuilding: () => boolean;

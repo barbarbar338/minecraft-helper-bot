@@ -18,7 +18,8 @@ const CollectCommad: Bot.Command = {
 		if (
 			manager.getCollecting() ||
 			manager.getFarming().farmed_at ||
-			manager.getFalling()
+			manager.getFalling() ||
+			manager.getGuarding()
 		)
 			return manager.bot.chat(
 				manager.i18n.get(

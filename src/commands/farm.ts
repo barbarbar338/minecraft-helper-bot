@@ -17,7 +17,11 @@ const FarmCommand: Bot.Command = {
 	],
 	master_only: true,
 	execute: ({ manager, args }) => {
-		if (manager.getCollecting() || manager.getFalling())
+		if (
+			manager.getCollecting() ||
+			manager.getFalling() ||
+			manager.getGuarding()
+		)
 			return manager.bot.chat(
 				manager.i18n.get(
 					manager.language,

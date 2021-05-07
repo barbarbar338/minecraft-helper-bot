@@ -34,6 +34,7 @@ export class Core extends Utils {
 	public isOnState = () =>
 		!!this.getFarming().farmed_at ||
 		!!this.getCollecting() ||
+		!!this.getGuarding() ||
 		!!this.getFollowing();
 
 	public isActing = () =>
