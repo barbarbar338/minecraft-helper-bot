@@ -151,12 +151,16 @@ export class Utils {
 			);
 	}
 
-	public reset() {
+	public resetStates() {
 		this.setCollecting(false);
 		this.setFalling(false);
 		this.setFollowing(false);
 		this.setGuarding(false);
-		this.setMaster();
 		this.setFarming();
+	}
+
+	public reset() {
+		this.resetStates();
+		this.setMaster();
 	}
 }

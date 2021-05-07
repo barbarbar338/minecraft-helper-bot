@@ -22,3 +22,4 @@ specify_valid_seed: I could not find the seed you specified. Enter the full Mine
 no_chests_found: I don't see any chests nearby. Place some chests and use "%{prefix}farm" command again.
 wont_guard: I won't guard you anymore. (%{days}d %{hours}h %{minutes}m %{seconds}s)
 will_guard: I will guard you.
+reset: I stopped doing everything you told me before and am waiting for another command.

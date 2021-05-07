@@ -12,7 +12,7 @@ const PlayerCollectEvent: Bot.Event = {
 		if (sword) await manager.bot.equip(sword, "hand");
 
 		const shield = items.find((item) => item.name.includes("shield"));
-		if (shield) manager.bot.equip(shield, "off-hand");
+		if (shield) await manager.bot.equip(shield, "off-hand");
 	},
 };
 
