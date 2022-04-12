@@ -13,15 +13,15 @@ export default function follow_master_state(manager: Core) {
 
 	const enter = new BehaviorIdle();
 	const exit = new BehaviorIdle();
-	const followPlayer = new BehaviorFollowEntity(manager.bot, targets);
+	const followPlayer = new BehaviorFollowEntity(manager.bot as any, targets);
 	const getClosestPlayer = new BehaviorGetClosestEntity(
-		manager.bot,
+		manager.bot as any,
 		targets,
 		(entity) =>
 			entity.type === "player" &&
 			entity.username === manager.getMaster().master,
 	);
-	const lookAtPlayer = new BehaviorLookAtEntity(manager.bot, targets);
+	const lookAtPlayer = new BehaviorLookAtEntity(manager.bot as any, targets);
 
 	const transitions = [
 		new StateTransition({

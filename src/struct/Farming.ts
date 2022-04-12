@@ -68,11 +68,8 @@ async function depositLoop(manager: Core) {
 
 async function deposit(window: Chest, slot: Item): Promise<void> {
 	return new Promise((resolve, reject) => {
-		window.deposit(slot.type, null, slot.count, (err) => {
-			if (err) reject(err);
-			else resolve();
-		});
-	});
+		window.deposit(slot.type, null, slot.count).then(resolve).catch(reject);
+	})
 }
 
 async function farmLoop(manager: Core) {

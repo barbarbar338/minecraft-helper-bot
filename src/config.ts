@@ -7,9 +7,9 @@ import { ViewerOptions } from "prismarine-viewer";
 config();
 
 const BOT_OPTIONS: ClientOptions = {
-	host: "localhost",
+	host: "0.tcp.ngrok.io",
 	username: "Dummy",
-	port: 51027,
+	port: 15040,
 };
 
 const VIEWER_OPTIONS: ViewerOptions = {
@@ -18,7 +18,6 @@ const VIEWER_OPTIONS: ViewerOptions = {
 	viewDistance: 4,
 };
 
-// causes error, (waiting for plugin update)
 const INVENTORY_VIEWER_OPTION: InventoryViewerOptions = {
 	port: 3001,
 };

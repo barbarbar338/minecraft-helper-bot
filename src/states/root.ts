@@ -19,14 +19,14 @@ export function create_root_state(manager: Core) {
 	const targets = {};
 
 	const idleState = new BehaviorIdle();
-	const lookAtPlayersState = new BehaviorLookAtEntity(manager.bot, targets);
-	const followPlayer = new BehaviorFollowEntity(manager.bot, targets);
+	const lookAtPlayersState = new BehaviorLookAtEntity(manager.bot as any, targets);
+	const followPlayer = new BehaviorFollowEntity(manager.bot as any, targets);
 	const followMasterState = follow_master_state(manager);
 	const collectState = collect_state(manager);
 	const guardState = guard_state(manager);
 	const farmState = farm_state(manager);
 	const getClosestPlayer = new BehaviorGetClosestEntity(
-		manager.bot,
+		manager.bot as any,
 		targets,
 		(entity) => entity.type === "player",
 	);
@@ -79,10 +79,10 @@ export function create_root_state(manager: Core) {
 	const root_state = new NestedStateMachine(transitions, idleState);
 	root_state.stateName = "Waiting";
 
-	manager.statemachine = new BotStateMachine(manager.bot, root_state);
+	manager.statemachine = new BotStateMachine(manager.bot as any, root_state);
 
 	const webserver = new StateMachineWebserver(
-		manager.bot,
+		manager.bot as any,
 		manager.statemachine,
 		CONFIG.STATE_MACHINE_PORT,
 	);

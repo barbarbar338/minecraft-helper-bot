@@ -6,10 +6,10 @@ import * as pogger from "pogger";
 import { BotStateMachine } from "mineflayer-statemachine";
 import { Utils } from "./Utils";
 import { plugins } from "./Plugins";
-import { IndexedData } from "minecraft-data";
 import { I18n } from "locale-parser";
 import { Vec3 } from "vec3";
 import { goals, Movements } from "mineflayer-pathfinder";
+import { IndexedData } from "minecraft-data";
 
 export class Core extends Utils {
 	public bot: Bot;
@@ -46,7 +46,7 @@ export class Core extends Utils {
 	public async goTo(vec: Vec3): Promise<void> {
 		return new Promise((promise_resolve) => {
 			const goal = new goals.GoalNear(vec.x, vec.y, vec.z, 1);
-			const default_move = new Movements(this.bot, this.minecraft_data!);
+			const default_move = new Movements(this.bot, this.minecraft_data as any);
 
 			this.bot.pathfinder.setMovements(default_move);
 			this.bot.pathfinder.setGoal(goal);
