@@ -94,8 +94,8 @@ const FarmCommand: Bot.Command = {
 
 			manager.bot.chat(
 				manager.i18n.get(manager.language, "commands", "will_farm", {
-					crop,
-					seed,
+					crop: crop as string,
+					seed: seed as string,
 				}) as string,
 			);
 		} else {
@@ -108,12 +108,12 @@ const FarmCommand: Bot.Command = {
 			const parsed = manager.parseMS(now - farm.farmed_at);
 
 			manager.bot.chat(
-				manager.i18n.get(
-					manager.language,
-					"commands",
-					"wont_farm",
-					parsed,
-				) as string,
+				manager.i18n.get(manager.language, "commands", "wont_farm", {
+					days: parsed.days.toString(),
+					hours: parsed.hours.toString(),
+					minutes: parsed.minutes.toString(),
+					seconds: parsed.seconds.toString(),
+				}) as string,
 			);
 		}
 	},

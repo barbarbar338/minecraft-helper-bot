@@ -13,12 +13,12 @@ const FollowCommad: Bot.Command = {
 			const parsed = manager.parseMS(now - followedAt);
 
 			manager.bot.chat(
-				manager.i18n.get(
-					manager.language,
-					"commands",
-					"wont_follow",
-					parsed,
-				) as string,
+				manager.i18n.get(manager.language, "commands", "wont_follow", {
+					days: parsed.days.toString(),
+					hours: parsed.hours.toString(),
+					minutes: parsed.minutes.toString(),
+					seconds: parsed.seconds.toString(),
+				}) as string,
 			);
 		} else
 			manager.bot.chat(

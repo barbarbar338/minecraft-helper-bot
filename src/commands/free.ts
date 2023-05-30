@@ -12,12 +12,12 @@ const FreeCommad: Bot.Command = {
 		const parsed = manager.parseMS(now - (master_since as number));
 
 		manager.bot.chat(
-			manager.i18n.get(
-				manager.language,
-				"commands",
-				"become_free",
-				parsed,
-			) as string,
+			manager.i18n.get(manager.language, "commands", "become_free", {
+				days: parsed.days.toString(),
+				hours: parsed.hours.toString(),
+				minutes: parsed.minutes.toString(),
+				seconds: parsed.seconds.toString(),
+			}) as string,
 		);
 	},
 };

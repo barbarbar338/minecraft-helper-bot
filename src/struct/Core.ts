@@ -1,15 +1,15 @@
-import { Bot, BotEvents, createBot } from "mineflayer";
+import { I18n } from "@hammerhq/localization";
+import { Logger } from "@hammerhq/logger";
 import { readdirSync } from "fs";
-import { resolve } from "path";
-import { CONFIG } from "../config";
-import * as pogger from "pogger";
-import { BotStateMachine } from "mineflayer-statemachine";
-import { Utils } from "./Utils";
-import { plugins } from "./Plugins";
-import { I18n } from "locale-parser";
-import { Vec3 } from "vec3";
-import { goals, Movements } from "mineflayer-pathfinder";
 import { IndexedData } from "minecraft-data";
+import { Bot, BotEvents, createBot } from "mineflayer";
+import { Movements, goals } from "mineflayer-pathfinder";
+import { BotStateMachine } from "mineflayer-statemachine";
+import { resolve } from "path";
+import { Vec3 } from "vec3";
+import { CONFIG } from "../config";
+import { plugins } from "./Plugins";
+import { Utils } from "./Utils";
 
 export class Core extends Utils {
 	public bot: Bot;
@@ -18,14 +18,16 @@ export class Core extends Utils {
 	public minecraft_data?: IndexedData;
 
 	public language = CONFIG.LOCALE_PARSER_OPTIONS.defaultLocale;
-	public logger = pogger;
+	public logger = new Logger("[Mineflayer]:");
 	public commands = new Map<string, Bot.Command>();
 	public i18n = new I18n(CONFIG.LOCALE_PARSER_OPTIONS);
 
 	constructor() {
 		super();
 
-		this.bot = createBot(CONFIG.BOT_OPTIONS);
+		this.bot = createBot({
+			...CONFIG.BOT_OPTIONS
+		});
 		this.bot.loadPlugins(plugins);
 	}
 
@@ -46,13 +48,13 @@ export class Core extends Utils {
 	public async goTo(vec: Vec3): Promise<void> {
 		return new Promise((promise_resolve) => {
 			const goal = new goals.GoalNear(vec.x, vec.y, vec.z, 1);
-			const default_move = new Movements(this.bot, this.minecraft_data as any);
+			const default_move = new Movements(this.bot);
 
 			this.bot.pathfinder.setMovements(default_move);
 			this.bot.pathfinder.setGoal(goal);
 
 			// a little type hack (mineflayer-pathfinder plugin adds this event but doesn't have type definitions)
-			const event_name = ("goal_reached" as unknown) as keyof BotEvents;
+			const event_name = "goal_reached" as unknown as keyof BotEvents;
 
 			const listener = () => {
 				this.bot.removeListener(event_name, listener);

@@ -19,7 +19,10 @@ export function create_root_state(manager: Core) {
 	const targets = {};
 
 	const idleState = new BehaviorIdle();
-	const lookAtPlayersState = new BehaviorLookAtEntity(manager.bot as any, targets);
+	const lookAtPlayersState = new BehaviorLookAtEntity(
+		manager.bot as any,
+		targets,
+	);
 	const followPlayer = new BehaviorFollowEntity(manager.bot as any, targets);
 	const followMasterState = follow_master_state(manager);
 	const collectState = collect_state(manager);

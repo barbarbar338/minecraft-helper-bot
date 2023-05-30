@@ -13,7 +13,10 @@ const ObeyCommad: Bot.Command = {
 			manager.bot.chat(
 				manager.i18n.get(manager.language, "commands", "slave_of", {
 					master,
-					...parsed,
+					days: parsed.days.toString(),
+					hours: parsed.hours.toString(),
+					minutes: parsed.minutes.toString(),
+					seconds: parsed.seconds.toString(),
 				}) as string,
 			);
 		} else {

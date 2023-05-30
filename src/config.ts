@@ -1,21 +1,22 @@
 import { config } from "dotenv";
-import { ClientOptions } from "minecraft-protocol";
+import { BotOptions } from "mineflayer";
 import { InventoryViewerOptions } from "mineflayer-web-inventory";
 import { join } from "path";
 import { ViewerOptions } from "prismarine-viewer";
 
 config();
 
-const BOT_OPTIONS: ClientOptions = {
-	host: "0.tcp.ngrok.io",
+const BOT_OPTIONS: BotOptions = {
+	host: "127.0.0.1",
 	username: "Dummy",
-	port: 15040,
+	port: 54789,
+	version: "1.19",
 };
 
 const VIEWER_OPTIONS: ViewerOptions = {
 	firstPerson: false,
 	port: 3000,
-	viewDistance: 4,
+	viewDistance: 8,
 };
 
 const INVENTORY_VIEWER_OPTION: InventoryViewerOptions = {

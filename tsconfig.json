@@ -4,7 +4,7 @@
 		"declaration": true,
 		"removeComments": false,
 		"allowSyntheticDefaultImports": true,
-		"target": "es6",
+		"target": "ES2022",
 		"outDir": "./dist",
 		"baseUrl": "./",
 		"incremental": true,

@@ -1,6 +1,6 @@
 {
 	"name": "minecraft-helper-bot",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"main": "dist",
 	"private": true,
 	"repository": {
@@ -8,9 +8,9 @@
 		"url": "https://github.com/barbarbar338/minecraft-helper-bot"
 	},
 	"author": {
-		"email": "demirci.baris38@gmail.com",
+		"email": "hi@338.rocks",
 		"name": "Barış DEMİRCİ",
-		"url": "https://barbarbar338.fly.dev"
+		"url": "https://338.rocks"
 	},
 	"license": "GPL-3.0",
 	"description": "🤖 A Minecraft bot that helps you about everything",
@@ -24,40 +24,43 @@
 		"format": "prettier --write .",
 		"format:watch": "onchange . -- prettier --write {{changed}}",
 		"lint": "eslint --fix .",
-		"lint:watch": "onchange . -- eslint --fix {{changed}}"
+		"lint:watch": "onchange . -- eslint --fix {{changed}}",
+		"update": "taze latest -w"
 	},
 	"devDependencies": {
-		"@types/node": "^17.0.23",
-		"@typescript-eslint/eslint-plugin": "^5.19.0",
-		"@typescript-eslint/parser": "^5.19.0",
+		"@types/node": "^20.2.5",
+		"@typescript-eslint/eslint-plugin": "^5.59.8",
+		"@typescript-eslint/parser": "^5.59.8",
 		"copyfiles": "^2.4.1",
-		"eslint": "^8.13.0",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-import": "^2.26.0",
-		"nodemon": "^2.0.15",
+		"eslint": "^8.41.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-import": "^2.27.5",
+		"nodemon": "^2.0.22",
 		"onchange": "^7.1.0",
-		"prettier": "^2.6.2",
-		"ts-node": "^10.7.0",
-		"typescript": "^4.6.3"
+		"prettier": "^2.8.8",
+		"rimraf": "^5.0.1",
+		"taze": "^0.10.1",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.0.4"
 	},
 	"dependencies": {
+		"@hammerhq/localization": "^0.1.5",
+		"@hammerhq/logger": "^0.1.5",
 		"bargs": "^1.0.4",
-		"dotenv": "^16.0.0",
-		"locale-parser": "^1.1.2",
-		"minecraft-data": "^3.0.0",
-		"minecraft-protocol": "^1.33.0",
-		"mineflayer": "^4.2.0",
+		"dotenv": "^16.0.3",
+		"minecraft-data": "^3.33.0",
+		"minecraft-protocol": "^1.41.2",
+		"mineflayer": "^4.8.1",
 		"mineflayer-armor-manager": "^1.4.2",
-		"mineflayer-auto-eat": "^2.3.3",
-		"mineflayer-collectblock": "^1.3.4",
-		"mineflayer-pathfinder": "^2.0.0",
-		"mineflayer-pvp": "^1.2.1",
-		"mineflayer-statemachine": "^1.6.5",
-		"mineflayer-web-inventory": "^1.7.1",
-		"pogger": "^0.0.8",
-		"prismarine-entity": "^2.1.1",
-		"prismarine-item": "^1.11.5",
-		"prismarine-viewer": "^1.22.0",
-		"vec3": "^0.1.7"
+		"mineflayer-auto-eat": "^3.3.6",
+		"mineflayer-collectblock": "^1.4.1",
+		"mineflayer-pathfinder": "^2.4.3",
+		"mineflayer-pvp": "^1.3.2",
+		"mineflayer-statemachine": "^1.7.0",
+		"mineflayer-web-inventory": "^1.8.4",
+		"prismarine-entity": "^2.2.0",
+		"prismarine-item": "^1.12.1",
+		"prismarine-viewer": "^1.25.0",
+		"vec3": "^0.1.8"
 	}
 }

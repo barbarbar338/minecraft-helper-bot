@@ -44,12 +44,12 @@ const GuardCommand: Bot.Command = {
 			const parsed = manager.parseMS(now - guard_at);
 
 			manager.bot.chat(
-				manager.i18n.get(
-					manager.language,
-					"commands",
-					"wont_guard",
-					parsed,
-				) as string,
+				manager.i18n.get(manager.language, "commands", "wont_guard", {
+					days: parsed.days.toString(),
+					hours: parsed.hours.toString(),
+					minutes: parsed.minutes.toString(),
+					seconds: parsed.seconds.toString(),
+				}) as string,
 			);
 		}
 	},

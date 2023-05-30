@@ -113,7 +113,7 @@ export class Utils {
 						"utils",
 						"found_blocks",
 						{
-							count: targets.length,
+							count: targets.length.toString(),
 						},
 					) as string,
 				);
@@ -137,7 +137,7 @@ export class Utils {
 			count: 999999,
 		});
 
-		if (manager.bot.collectBlock.chestLocations.length === 0)
+		if (manager.bot.collectBlock.chestLocations && manager.bot.collectBlock.chestLocations.length)
 			manager.bot.chat(
 				manager.i18n.get(manager.language, "utils", "no_chest_found", {
 					prefix: CONFIG.PREFIX,
@@ -146,7 +146,7 @@ export class Utils {
 		else
 			manager.bot.chat(
 				manager.i18n.get(manager.language, "utils", "found_chest", {
-					count: manager.bot.collectBlock.chestLocations.length,
+					count: manager.bot.collectBlock.chestLocations.length.toString(),
 				}) as string,
 			);
 	}
